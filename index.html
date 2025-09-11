@@ -1,0 +1,460 @@
+
+<!-- FILE: index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sikkim Explorer — Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand">SikkimExplorer</div>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+
+
+        <a href="cities.html">Cities</a>
+
+        <a href="culture.html">Culture &amp; Info</a>
+        
+        <a href="utilities.html">Utilities</a>
+      </nav>
+      <button id="chat-toggle" class="chat-toggle">Chat</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner container">
+        <h1>Sikkim Explorer</h1>
+        <p>Your ultimate guide to the breathtaking beauty and rich culture of Sikkim.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="cities.html">Explore Cities</a>
+          <a class="btn outline" href="culture.html">Learn About Culture</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section class="container section story">
+      <h2>Sikkim's Story</h2>
+      <p class="muted">A land steeped in ancient traditions and breathtaking natural beauty.</p>
+      <div class="story-grid">
+        <div class="story-text">
+          <p>Sikkim, nestled in the Himalayan heights, has a rich history dating back to the 17th century when the Namgyal dynasty ruled. The state is a melting pot of Tibetan, Nepali and Bhutia cultures, home to ancient monasteries, rhododendron forests and crystal-blue glacial lakes.</p>
+          <a class="link-btn" href="culture.html">Read Full History</a>
+        </div>
+        <div class="story-media">
+          <img src="images/home-hero.jpg" alt="Sikkim landscape" />
+        </div>
+      </div>
+    </section>
+
+    <!-- At a glance -->
+     <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sikkim Monastery Services</title>
+
+  <!-- Tailwind (optional for styling) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Pannellum for 360° -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css">
+  <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
+
+  <!-- Leaflet for maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      width: 90%;
+      max-width: 900px;
+      max-height: 90vh;
+      overflow: auto;
+    }
+  </style>
+</head>
+
+</html>
+
+    <section class="section pale">
+      <div class="container">
+        <h2>Sikkim at a Glance</h2>
+        <p class="muted">Discover key locations and what makes Sikkim unique.</p>
+        <div class="glance-card">
+          <img src="images/glance.jpg" alt="map and travellers">
+        </div>
+      </div>
+    </section>
+
+    <!-- Spiritual Sanctuaries -->
+    <section class="section container">
+  <h2>Spiritual Sanctuaries</h2>
+  <p class="muted">Explore some of the most revered monasteries and their unique histories.</p>
+  <div class="card-grid">
+    <article class="card">
+      <img src="images/rumtek.jpg" alt="Rumtek Monastery" class="monastery-img">
+      <h3>Rumtek Monastery</h3>
+      <p>Largest monastery in Sikkim and a major Tibetan Buddhist seat.</p>
+    </article>
+    <article class="card">
+      <img src="images/pemayangtse.jpg" alt="Pemayangtse" class="monastery-img">
+      <h3>Pemayangtse Monastery</h3>
+      <p>One of the oldest monasteries with rich artifacts and views.</p>
+    </article>
+    <article class="card">
+      <img src="images/enchey.jpg" alt="Enchey Monastery" class="monastery-img">
+      <h3>Enchey Monastery</h3>
+      <p>A peaceful monastery near Gangtok, known for festivals.</p>
+    </article>
+    <article class="card">
+      <img src="images/phodong.jpg" alt="Phodong Monastery" class="monastery-img">
+      <h3>Phodong Monastery</h3>
+      <p>Historic monastery with colorful murals and ceremonies.</p>
+    </article>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+    <body class="bg-slate-100 p-6">
+
+  <h1 class="text-3xl font-bold mb-6">Monastery Services(360°)</h1>
+
+   <!-- Monastery cards --> 
+  <div id="monasteries" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+  <!-- 360° Modal -->
+  <div id="panoModal" class="modal">
+    <div class="modal-content">
+      <button onclick="closeModal('panoModal')" class="bg-red-500 text-white px-3 py-1 rounded">Close</button>
+      <div id="panoViewer" class="h-[60vh] w-full mt-4"></div>
+    </div>
+  </div>
+
+  <!-- GPS Modal -->
+  <div id="mapModal" class="modal">
+    <div class="modal-content">
+      <button onclick="closeModal('mapModal')" class="bg-red-500 text-white px-3 py-1 rounded">Close</button>
+      <div id="map" class="h-[60vh] w-full mt-4"></div>
+    </div>
+  </div>
+
+  <script>
+    // Sample monastery data
+    const monasteries = [
+      {
+        id: "rumtek",
+        name: "Rumtek Monastery",
+        city: "Gangtok",
+        lat: 27.3339,
+        lng: 88.6226,
+        pano: "https://pannellum.org/images/alma.jpg"
+      },
+      {
+        id: "pemayangtse",
+        name: "Pemayangtse Monastery",
+        city: "Pelling",
+        lat: 27.2996,
+        lng: 88.2369,
+        pano: "https://pannellum.org/images/bma-1.jpg"
+      }
+    ];
+
+    // Render monastery cards
+    const container = document.getElementById("monasteries");
+    monasteries.forEach(m => {
+      const card = document.createElement("div");
+      card.className = "bg-white shadow rounded-xl p-4";
+      card.innerHTML = `
+        <h2 class="text-xl font-semibold">${m.name}</h2>
+        <p class="text-gray-600 mb-3">${m.city}</p>
+        <div class="flex gap-2">
+          <button onclick="openPano('${m.pano}')" class="bg-blue-500 text-white px-3 py-1 rounded">360° View</button>
+          <button onclick="openMap(${m.lat}, ${m.lng})" class="bg-green-500 text-white px-3 py-1 rounded">Live Track</button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+
+    // Modal handling
+    function openModal(id) {
+      document.getElementById(id).style.display = "flex";
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+      if (id === "mapModal" && map) {
+        navigator.geolocation.clearWatch(watchId);
+      }
+    }
+
+    // 360° Viewer
+    function openPano(panoUrl) {
+      openModal("panoModal");
+      pannellum.viewer('panoViewer', {
+        type: "equirectangular",
+        panorama: panoUrl,
+        autoLoad: true
+      });
+    }
+
+    // Map + GPS Tracking
+    let map, marker, polyline, watchId;
+    function openMap(lat, lng) {
+      openModal("mapModal");
+      if (!map) {
+        map = L.map("map").setView([lat, lng], 14);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+      }
+      L.marker([lat, lng]).addTo(map).bindPopup("Monastery").openPopup();
+
+      const path = [];
+      polyline = L.polyline(path, { color: "blue" }).addTo(map);
+
+      if ("geolocation" in navigator) {
+        watchId = navigator.geolocation.watchPosition(pos => {
+          const { latitude, longitude } = pos.coords;
+          path.push([latitude, longitude]);
+          if (!marker) {
+            marker = L.marker([latitude, longitude]).addTo(map);
+          } else {
+            marker.setLatLng([latitude, longitude]);
+          }
+          polyline.setLatLngs(path);
+          map.setView([latitude, longitude]);
+        });
+      } else {
+        alert("Geolocation not supported!");
+      }
+    }
+  </script>
+  
+  <!-- Disclaimer Modal -->
+<div id="disclaimerModal" class="modal">
+  <div class="modal-content" style="text-align:center;">
+    <h2>Monastery Visitor Disclaimer</h2>
+    <p>Please respect the sacredness of monasteries by following these guidelines:</p>
+
+    <h3>✅ Do’s</h3>
+    <ul style="text-align:left;">
+      <li>Maintain silence inside monastery premises.</li>
+      <li>Dress modestly and respectfully.</li>
+      <li>Remove shoes before entering prayer halls.</li>
+      <li>Seek permission before taking photos.</li>
+      <li>Respect ongoing prayers and rituals.</li>
+    </ul>
+
+    <h3>❌ Don’ts</h3>
+    <ul style="text-align:left;">
+      <li>Do not touch sacred objects or statues.</li>
+      <li>Avoid smoking, drinking, or littering.</li>
+      <li>Do not interrupt monks during prayers.</li>
+      <li>Avoid loud conversations or phone use.</li>
+      <li>Do not step on prayer mats or offerings.</li>
+    </ul>
+
+    <!-- Floating big Utilities button -->
+    <div style="margin: 25px 0;">
+      <button onclick="window.location.href='utilities.html'" 
+              style="padding: 15px 40px; font-size: 20px; font-weight: bold; 
+                     background:#1d4ed8; color:white; border:none; 
+                     border-radius:12px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
+        🚀 Utilities & Services
+      </button>
+    </div>
+
+    <!-- Close button -->
+    <button onclick="closeDisclaimer()" 
+            class="bg-red-500 text-white px-3 py-1 rounded">
+      Close
+    </button>
+  </div>
+</div>
+
+<!-- Disclaimer Icon Widget -->
+<div id="disclaimerIcon" 
+     style="position:fixed; bottom:90px; right:20px; background:#444; color:#fff; 
+            width:42px; height:42px; border-radius:50%; display:flex; 
+            justify-content:center; align-items:center; font-size:20px; 
+            cursor:pointer; z-index:9999;" 
+     title="Disclaimer">
+  ⚠️
+</div>
+
+<script>
+  // Disclaimer handling
+  function openDisclaimer() {
+    document.getElementById('disclaimerModal').style.display = 'flex';
+  }
+  function closeDisclaimer() {
+    document.getElementById('disclaimerModal').style.display = 'none';
+  }
+
+  // Open Disclaimer when clicking monastery images
+  document.querySelectorAll('.section.container .card img').forEach(img => {
+    img.addEventListener('click', openDisclaimer);
+  });
+
+  // Icon widget click
+  document.getElementById('disclaimerIcon').addEventListener('click', openDisclaimer);
+</script>
+
+  
+</body> 
+
+
+
+
+
+
+    <!-- Local Expeditions -->
+    <section class="section pale">
+      <div class="container">
+        <h2>Local Expeditions</h2>
+        <p class="muted">Discover convenient and exciting ways to travel across Sikkim.</p>
+        <div class="card-grid">
+          <div class="card small">
+            <img src="images/bike.jpg" alt="Bikes">
+            <h4>Bikes & Scooters</h4>
+            <p>Rent bikes and discover scenic routes.</p>
+          </div>
+          <div class="card small">
+            <img src="images/shared-vehicle.jpg" alt="Shared vehicles">
+            <h4>Shared Vehicles & Taxis</h4>
+            <p>Easy shared rides between towns.</p>
+          </div>
+          <div class="card small">
+            <img src="images/rickshaw.jpg" alt="rickshaw">
+            <h4>Local Rickshaws</h4>
+            <p>Short trips and eco-friendly rides in towns.</p>
+          </div>
+          <div class="card small">
+            <img src="images/trek.jpg" alt="trekking">
+            <h4>Walking & Trekking</h4>
+            <p>Guided treks through mountain trails.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta dark">
+      <div class="container cta-inner">
+        <h2>Ready to Plan Your Sikkim Adventure?</h2>
+        <p class="muted">From monasteries to pristine lakes — start planning today.</p>
+        <div class="cta-row">
+          <a class="btn outline" href="cities.html">Discover Cities</a>
+          <a class="btn primary" href="culture.html">Explore Culture & Info</a>
+          <a class="btn primary" href="utilities.html">Utilities & Services</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>SikkimExplorer</strong>
+        <p class="muted">Explore, support, preserve.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="cities.html">Gangtok</a></li>
+          <li><a href="cities.html">Tsomgo Lake</a></li>
+          <li><a href="cities.html">Yumthang</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="culture.html">Culture</a></li>
+           <li><a href="utilities.html">Utilities</a>
+          <li><a href="#">Travel Guide</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small>© <span id="year"></span> SikkimExplorer — All rights reserved</small>
+    </div>
+  </footer>
+
+
+  
+
+  <!-- Chatbot widget -->
+  <div id="chatbot" class="chatbot">
+    <div class="chat-header">
+      <div>Chat with SikkimExplorer</div>
+      <button id="close-chat">✕</button>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <div class="bot-msg">Hello 👋 — I can help you plan your trip. Try: <em>best time to visit</em>, <em>Rumtek monastery</em>, or <em>Gangtok hotels</em>.</div>
+    </div>
+    <div class="chat-input">
+      <select id="lang-select" title="Language">
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="ne">नेपाली</option>
+      </select>
+      <input id="chat-input" placeholder="Ask about Sikkim — e.g. 'how to reach Gangtok'" />
+      <button id="send-msg">Send</button>
+    </div>
+  </div>
+
+  <script src="chatbot.js"></script>
+  <script>
+    // simple page scripts
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+
+
+    
+  </script>
+
+  
+
+  
+</body>
+
+</html>
+
+
+<!-- FILE: culture.html -->
+

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sikkim Explorer — Culture &amp; Practical Guide</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand">SikkimExplorer</div>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="cities.html">Cities</a>
+        <a href="culture.html">Culture &amp; Info</a>
+        <a href="utilities.html">Utilities</a>
+      </nav>
+      <button id="chat-toggle-2" class="chat-toggle">Chat</button>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top:65px;">
+    <section class="section">
+      <h1>Sikkim: Culture & Practical Guide</h1>
+      <p class="muted">Dive deep into the heart of Sikkim with comprehensive guides covering local insights, travel planning and vibrant traditions.</p>
+    </section>
+    <section class="section">
+      <h2>Empowering Local Communities</h2>
+      <div class="grid-2">
+        <div class="card info">
+          <h3>Local Guide Program</h3>
+          <p>Join certified local guide programs to help visitors and preserve cultural heritage.</p>
+          <a class="btn outline" href="#">Learn More</a>
+        </div>
+        <div class="card info">
+          <h3>Tourism Job Opportunities</h3>
+          <p>Find jobs in hospitality, trekking, guiding and local handicraft promotion.</p>
+          <a class="btn outline" href="#">Explore Jobs</a>
+        </div>
+      </div>
+    </section>
+     <section class="section pale">
+      <h2>Your Journey to Sikkim: A Roadmap</h2>
+      <div class="accordion">
+        <details open>
+          <summary>Planning Your Route & Entry</summary>
+          <p>Routes to Sikkim include flight to Bagdogra, then road to Gangtok; or rail to New Jalpaiguri and road. Permits required for some areas.</p>
+        </details>
+        <details>
+          <summary>Best Time to Visit & Duration</summary>
+          <p>October–December and March–May are popular. For rhododendron blooms, plan for April–May.</p>
+        </details>
+        <details>
+          <summary>Accommodation & Local Transport</summary>
+          <p>Options range from homestays to luxury hotels; shared taxis and buses are common for inter-town travel.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Sikkim in Motion: Visual Journeys</h2>
+      <div class="card-grid">
+        <article class="card small">
+          <img src="images/drive.jpg" alt="drive">
+          <h4>A Drive Through Mystical Valleys</h4>
+          <a class="link-btn" href="#">View Video</a>
+        </article>
+        <article class="card small">
+          <img src="images/monastery-life.jpg" alt="monastery">
+          <h4>Life in a Sikkimese Monastery</h4>
+          <a class="link-btn" href="#">View Video</a>
+        </article>
+        <article class="card small">
+          <img src="images/festival.jpg" alt="festival">
+          <h4>Festivals and Celebrations</h4>
+          <a class="link-btn" href="#">View Video</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section pale">
+      <h2>Sikkim in Numbers &amp; Smarter Travel</h2>
+      <div class="grid-2">
+        <div class="card info">
+          <h4>Key Statistics</h4>
+          <ul class="muted small-list">
+            <li>Population: ~6 Lakh</li>
+            <li>Primary Sectors: Agriculture, Tourism, Hydropower</li>
+            <li>Per capita incomes vary across districts</li>
+          </ul>
+        </div>
+        <div class="card info">
+          <h4>Time Management Tips</h4>
+          <ul class="muted small-list">
+            <li>Visit popular sites early morning to avoid crowds</li>
+            <li>Book permits/tickets online where available</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+
+    
+    
+    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Sound Guide AI</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; }
+    #chatWidget {
+      position: fixed; bottom: 20px; right: 20px;
+      width: 250px; height: 320px;
+      background: #fff; border: 1px solid #ccc;
+      border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    #chatLog { flex: 1; overflow-y: auto; padding: 6px; font-size: 13px; }
+    .msg { margin: 4px 0; padding: 6px; border-radius: 8px; }
+    .user { background: #2563eb; color: #fff; text-align: right; }
+    .ai { background: #f1f1f1; color: #000; text-align: left; }
+    #controls { display: flex; border-top: 1px solid #ccc; }
+    #input { flex: 1; border: none; padding: 6px; font-size: 13px; }
+    button { border: none; background: #2563eb; color: white; padding: 0 10px; cursor: pointer; }
+    #mic { background: #e11d48; }
+  </style>
+</head>
+<body>
+
+<div id="chatWidget">
+  <div id="chatLog"></div>
+  <div id="controls">
+    <input id="input" placeholder="Say hi...">
+    <button id="send">➤</button>
+    <button id="mic">🎤</button>
+  </div>
+</div>
+
+<script>
+  const chatLog = document.getElementById("chatLog");
+  const input = document.getElementById("input");
+
+  function addMsg(text, cls) {
+    const m = document.createElement("div");
+    m.className = "msg " + cls;
+    m.textContent = text;
+    chatLog.appendChild(m);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+
+  function aiReply(q) {
+    let r = "I am your sound guide AI!";
+    if (q.toLowerCase().includes("monastery")) r = "Sikkim monasteries are rich in culture and history.";
+    addMsg(r, "ai");
+    speechSynthesis.speak(new SpeechSynthesisUtterance(r));
+  }
+
+  document.getElementById("send").onclick = () => {
+    if (!input.value) return;
+    addMsg(input.value, "user");
+    aiReply(input.value);
+    input.value = "";
+  };
+
+  // Speech recognition
+  let rec;
+  if ("webkitSpeechRecognition" in window) {
+    rec = new webkitSpeechRecognition();
+    rec.lang = "en-US";
+    rec.onresult = e => {
+      input.value = e.results[0][0].transcript;
+      document.getElementById("send").click();
+    };
+  }
+  document.getElementById("mic").onclick = () => {
+    if (rec) rec.start(); else alert("Speech recognition not supported.");
+  };
+
+  // Greeting
+  addMsg("👋 Hello! I'm your AI sound guide.", "ai");
+</script>
+
+</body>
+</html>
+
+
+
+
+    <section class="section">
+      <h2>Sikkim's Vibrant Cultural Fabric & Iconic Destinations</h2>
+      <div class="grid-2">
+        <div>
+          <img src="images/culture-people.jpg" alt="culture" class="wide">
+        </div>
+        <div>
+          <p>Sikkim's culture is shaped by Lepchas, Bhutias and Nepalis. Traditional dances, festivals and spiritual practices play a central role in daily life.</p>
+          <div class="card-grid small-cards">
+            <div class="card small"><img src="images/gangtok.jpg"><h4>Gangtok</h4></div>
+            <div class="card small"><img src="images/tsomgo.jpg"><h4>Tsomgo Lake</h4></div>
+            <div class="card small"><img src="images/nathula.jpg"><h4>Nathula Pass</h4></div>
+            <div class="card small"><img src="images/yumthang.jpg"><h4>Yumthang Valley</h4></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><strong>SikkimExplorer</strong><p class="muted">Preserve &amp; explore.</p></div>
+    </div>
+  </footer>
+
+  <script src="chatbot.js"></script>
+  <script>document.getElementById('year')?.textContent = new Date().getFullYear();</script>
+</body>
+
+</html>
+
+
+<!-- FILE: cities.html -->
+
+

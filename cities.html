@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sikkim Explorer — Cities</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand">SikkimExplorer</div>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="cities.html">Cities</a>
+        <a href="culture.html">Culture &amp; Info</a>
+        <a href="utilities.html">Utilities</a>
+      </nav>
+      <button id="chat-toggle-3" class="chat-toggle">Chat</button>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top:80px;">
+    <section>
+      <h2>Select a City</h2>
+      <select id="city-select">
+        <option value="gangtok">Gangtok</option>
+        <option value="pelling">Pelling</option>
+        <option value="namchi">Namchi</option>
+      </select>
+    </section>
+
+    <section class="section city-hero">
+      <img id="city-hero-img" src="images/gangtok-hero.jpg" alt="Gangtok">
+      <div class="city-hero-text">
+        <h1 id="city-title">Gangtok</h1>
+        <p id="city-sub">The vibrant capital offering modern amenities and spiritual retreats.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Top Attractions</h2>
+      <div class="card-grid">
+        <!-- Repeat cards dynamically with JS in future; static examples here -->
+        <div class="card small"><img src="images/rumtek.jpg"><h4>Rumtek Monastery</h4></div>
+        <div class="card small"><img src="images/tsomgo.jpg"><h4>Tsomgo Lake</h4></div>
+        <div class="card small"><img src="images/nathula.jpg"><h4>Nathula Pass</h4></div>
+        <div class="card small"><img src="images/hanuman.jpg"><h4>Hanuman Tok</h4></div>
+        <div class="card small"><img src="images/mall-road.jpg"><h4>Mall Road</h4></div>
+      </div>
+    </section>
+     <section class="section pale">
+      <h2>Local Delicacies & Food Guide</h2>
+      <div class="food-grid">
+        <div class="food-card"><img src="images/momos.jpg"><h4>Momos</h4></div>
+        <div class="food-card"><img src="images/thukpa.jpg"><h4>Thukpa</h4></div>
+        <div class="food-card"><img src="images/gundruk.jpg"><h4>Gundruk</h4></div>
+        <div class="food-card"><img src="images/achaari.jpg"><h4>Achaari</h4></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Accommodation Spotlight</h2>
+      <div class="card-grid">
+        <div class="card small"><img src="images/hotel1.jpg"><h4>Mountain View Resort</h4><a class="link-btn" href="#">Book Now</a></div>
+        <div class="card small"><img src="images/hotel2.jpg"><h4>Valley Retreat</h4><a class="link-btn" href="#">Book Now</a></div>
+        <div class="card small"><img src="images/hotel3.jpg"><h4>Heritage Hotel</h4><a class="link-btn" href="#">Book Now</a></div>
+      </div>
+    </section>
+    
+    <section class="section pale">
+      <h2>Nearby Adventures</h2>
+      <div class="nearby-grid">
+        <div class="adventure-card"><img src="images/pelling.jpg"><h4>Pelling</h4><p>Famous for views of Khangchendzonga.</p></div>
+        <div class="adventure-card"><img src="images/yumthang.jpg"><h4>Yumthang</h4><p>Valley of Flowers — seasonal bloom.</p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><strong>SikkimExplorer</strong><p class="muted">Start exploring.</p></div>
+    </div>
+  </footer>
+
+  <script src="chatbot.js"></script>
+  <script>
+    const citySelect = document.getElementById('city-select');
+    const cityTitle = document.getElementById('city-title');
+    const cityHeroImg = document.getElementById('city-hero-img');
+
+    const cityData = {
+      gangtok: {title: 'Gangtok', img: 'images/gangtok-hero.jpg', sub: 'The vibrant capital offering modern ammenities and spiritual retreats.'},
+      pelling: {title: 'Pelling', img: 'images/pelling-hero.jpg', sub: 'A peaceful hill town with panoramic views of Khangchendzonga.'},
+      namchi: {title: 'Namchi', img: 'images/namchi-hero.jpg', sub: 'Famous for cultural sites and the Char Dham complex.'}
+    };
+
+    citySelect.addEventListener('change', e => {
+      const v = e.target.value;
+      cityTitle.textContent = cityData[v].title;
+      cityHeroImg.src = cityData[v].img;
+      document.getElementById('city-sub').textContent = cityData[v].sub;
+    });
+  </script>
+</body>
+</html>
+
+

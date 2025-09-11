@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sikkim Explorer - Utilities & Tickets</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fafafa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .site-header {
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 18px 40px;
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .brand {
+      font-size: 22px;
+      font-weight: bold;
+      color: #1c5d47;
+    }
+    .main-nav a {
+      color: #333;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+    .main-nav a:hover {
+      color: #1c5d47;
+    }
+    .chat-toggle, .calendar-toggle, .lost-toggle {
+      background: #1c5d47;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    .chat-toggle:hover, .calendar-toggle:hover, .lost-toggle:hover {
+      background: #174a39;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 55vh;
+      background: url('images/sikkim-road.jpg') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      font-size: 36px;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+      padding: 20px;
+    }
+
+    /* Services Section */
+    .services {
+      padding: 80px 20px;
+      text-align: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .services h2 {
+      font-size: 32px;
+      margin-bottom: 50px;
+      color: #1c5d47;
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+    .service-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .service-card p {
+      margin: 0;
+      padding: 18px;
+      color: #1c5d47;
+      font-size: 18px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* Feedback Button */
+    .feedback-btn {
+      display: block;
+      margin: 50px auto;
+      background: #ff9800;
+      color: #fff;
+      border: none;
+      padding: 18px 40px;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      transition: transform 0.3s ;
+    }
+    .feedback-btn:hover {
+      background: #e68900;
+      transform: translateY(-3px);
+    }
+
+    /* Popup Base Style */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    /* Feedback Popup */
+    .    /* Feedback Popup */
+    feedback-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      width: 450px;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .feedback-content h3 {
+      margin-top: 0;
+      color: #d4d9d7;
+      text-align: center;
+    }
+    .feedback-close {
+      background: #1c5d47;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .feedback-submit {
+      background: #ff9800;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* ✅ Feedback form fields styling */
+    .feedback-content form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #f1ebeb;
+    }
+
+    .feedback-content form input,
+    .feedback-content form select,
+    .feedback-content form textarea {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    .feedback-content form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+
+
+    /* Popup Base Style */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0,0,0,0.75); /* Darker background */
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px); /* ✅ Adds blur effect */
+}
+
+
+
+    /* Calendar Popup */
+    .calendar-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .calendar-close {
+      background: #1c5d47;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+    }
+
+    /* Lost Assistance Popup */
+    .lost-content {
+      position: relative;
+      background: black;
+      border-radius: 12px;
+      overflow: hidden;
+      width: 90%;
+      max-width: 450px;
+      height: 70vh;
+      text-align: center;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 6px 12px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .destination {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    /* Footer */
+    footer {
+      background: #ffffff;
+      border-top: 1px solid #e0e0e0;
+      color: #555;
+      text-align: center;
+      padding: 25px;
+      font-size: 14px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Global Header -->
+  <header class="site-header">
+    <div class="header-row">
+      <div class="brand">SikkimExplorer</div>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="cities.html">Cities</a>
+        <a href="culture.html">Culture &amp; Info</a>
+        <a href="utilities.html">Utilities</a>
+
+
+
+        
+
+      </nav>
+      
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scan Place Assistance</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fafafa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .site-header {
+      background: #ffffff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 18px 40px;
+    }
+    .header-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .btn {
+      background: #1c5d47;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn:hover {
+      background: #174a39;
+    }
+
+    /* Popup Base */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.75);
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Scan Popup */
+    .scan-content {
+      position: relative;
+      background: black;
+      border-radius: 12px;
+      overflow: hidden;
+      width: 90%;
+      max-width: 450px;
+      height: 70vh;
+      text-align: center;
+      color: white;
+    }
+    .scan-content video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .scan-content canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .scan-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 6px 12px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .scan-info {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.7);
+      padding: 12px;
+      border-radius: 8px;
+      max-width: 90%;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    /* AI Speaker Controls */
+    .speaker-controls {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      background: rgba(0,0,0,0.6);
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    .speaker-controls select, .speaker-controls button {
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    .speaker-controls select {
+      background: #fff;
+      color: #000;
+    }
+    .speaker-controls button {
+      background: #ff9800;
+      color: #fff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-row">
+      <button id="scanBtn" class="btn">🔍 Scan Place</button>
+    </div>
+  </header>
+
+  <!-- Scan Place Popup -->
+  <div id="scan-popup" class="popup">
+    <div class="scan-content">
+      <video id="scanVideo" autoplay playsinline></video>
+      <canvas id="scanCanvas"></canvas>
+      <button class="scan-close" id="scanCloseBtn">X</button>
+      <div class="scan-info" id="scanInfo">Scanning... please wait</div>
+      
+      <!-- AI Speaker Controls -->
+      <div class="speaker-controls" id="speakerControls" style="display:none;">
+        <select id="languageSelect">
+          <option value="en-IN">English</option>
+          <option value="hi-IN">Hindi</option>
+          <option value="ne-NP">Nepali</option>
+        </select>
+        <button id="speakBtn">🔊 Speak</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Elements
+    const scanBtn = document.getElementById("scanBtn");
+    const scanPopup = document.getElementById("scan-popup");
+    const scanVideo = document.getElementById("scanVideo");
+    const scanCanvas = document.getElementById("scanCanvas");
+    const scanCtx = scanCanvas.getContext("2d");
+    const scanCloseBtn = document.getElementById("scanCloseBtn");
+    const scanInfo = document.getElementById("scanInfo");
+    const speakerControls = document.getElementById("speakerControls");
+    const speakBtn = document.getElementById("speakBtn");
+    const languageSelect = document.getElementById("languageSelect");
+
+    // Open Scan Popup
+    scanBtn.addEventListener("click", async () => {
+      scanPopup.style.display = "flex";
+      try {
+        let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        scanVideo.srcObject = stream;
+        scanVideo.addEventListener("loadedmetadata", () => {
+          scanCanvas.width = scanVideo.videoWidth;
+          scanCanvas.height = scanVideo.videoHeight;
+          simulateScan();
+          speakerControls.style.display = "flex"; // show AI speaker options
+        });
+      } catch (err) {
+        alert("Camera access denied or not available.");
+      }
+    });
+
+    // Fake AI Scan
+    function simulateScan() {
+      scanCtx.clearRect(0, 0, scanCanvas.width, scanCanvas.height);
+      scanCtx.strokeStyle = "yellow";
+      scanCtx.lineWidth = 4;
+      scanCtx.strokeRect(scanCanvas.width/3, scanCanvas.height/3, 150, 150);
+
+      const placeInfo = `
+        Rumtek Monastery. 
+        Built in the 16th Century. 
+        Seat of the Kagyu lineage of Tibetan Buddhism. 
+        One of the largest and most important monasteries in Sikkim.
+      `;
+      scanInfo.innerHTML = `
+        <strong>Rumtek Monastery</strong><br>
+        🏯 Built: 16th Century<br>
+        📖 History: Seat of the Kagyu lineage of Tibetan Buddhism.<br>
+        🌍 Significance: One of the largest monasteries in Sikkim.
+      `;
+
+      requestAnimationFrame(simulateScan);
+    }
+
+    // Speak Info in Selected Language
+    speakBtn.addEventListener("click", () => {
+      const text = scanInfo.innerText;
+      const lang = languageSelect.value;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); 
+        let utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang;
+        utterance.rate = 1; 
+        utterance.pitch = 1; 
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Your browser does not support speech synthesis.");
+      }
+    });
+
+    // Close Popup
+    scanCloseBtn.addEventListener("click", () => {
+      scanPopup.style.display = "none";
+      let stream = scanVideo.srcObject;
+      if (stream) stream.getTracks().forEach(track => track.stop());
+      scanVideo.srcObject = null;
+      scanCtx.clearRect(0, 0, scanCanvas.width, scanCanvas.height);
+      scanInfo.textContent = "Scanning... please wait";
+      speakerControls.style.display = "none";
+      window.speechSynthesis.cancel();
+    });
+  </script>
+</body>
+</html>
+
+
+      
+      <div>
+        
+        <button id="chat-toggle" class="chat-toggle">Chat</button>
+        <button id="calendar-toggle" class="calendar-toggle">Festivals</button>
+
+        
+        
+        <button id="lostBtn" class="lost-toggle">I’m Lost</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    Explore Sikkim with Smart Services
+  </section>
+
+
+  
+
+  <!-- Services -->
+  <section class="services">
+    <h2>Our Utilities & Services</h2>
+    <div class="service-grid">
+      <div class="service-card"><img src="images/fuel-station-sikkim.jpg"><p>Nearby Fuel Stations</p></div>
+      <div class="service-card"><img src="images/charging-point-sikkim.jpg"><p>EV Charging Points</p></div>
+      <div class="service-card"><img src="images/ticket-booking.jpg"><p>Ticket Booking</p></div>
+      <div class="service-card"><img src="images/hospital-sikkim.jpg"><p>Nearby Hospitals</p></div>
+      <div class="service-card"><img src="images/wallet.jpg"><p>Digital Wallet</p></div>
+      <div class="service-card"><img src="images/donation.jpg"><p>Donate to Monasteries</p></div>
+      <div class="service-card"><img src="images/atm.jpg"><p>Nearby ATMs</p></div>
+      <div class="service-card"><img src="images/calendar.jpg"><p>Festival Calendar</p></div>
+      <div class="service-card"><img src="images/turmeric.jpg"><p>Buy Sikkim Cardamom</p></div>
+
+<div class="service-card" id="offline-map-card">
+  <img src="images/offline-map.jpg" alt="Offline Map">
+  <p>Offline Map & Route of Sikkim</p>
+</div>
+
+
+
+    </div>
+  </section>
+
+  <!-- Feedback Button -->
+  <button id="feedback-btn" class="feedback-btn">📝 Give Feedback</button>
+  
+
+  <!-- Feedback Popup -->
+  <div id="feedback-popup" class="popup">
+    <div class="feedback-content">
+      <h3>Feedback on Your Sikkim Trip</h3>
+      <form id="feedback-form">
+        <label>1. How was your overall experience?</label>
+        <select required>
+          <option value="">-- Select --</option>
+          <option>Excellent</option>
+          <option>Good</option>
+          <option>Average</option>
+          <option>Poor</option>
+        </select>
+
+         <label>2. Which place did you enjoy the most?</label>
+        <input type="text" placeholder="Enter place name" required>
+
+        <label>3. Suggestions for improvement:</label>
+        <textarea placeholder="Write here..." required></textarea>
+
+        <button type="submit" class="feedback-submit">Submit</button>
+        <button type="button" id="feedback-close" class="feedback-close">Close</button>
+      </form>
+    </div>
+  </div>
+
+
+<!-- Emergency Button -->
+<button id="emergency-btn" class="feedback-btn" style="background:#e53935;">🚨 Emergency</button>
+
+<!-- Emergency Popup -->
+<div id="emergency-popup" class="popup">
+  <div class="feedback-content">
+    <h3>Emergency Support</h3>
+    <ul style="text-align:left; color:#eff3f2; font-weight:500; padding-left:20px;">
+      <li>🚓 Police Support: 24×7</li>
+      <li>🚑 Ambulance Service: 24×7</li>
+      <li>🧭 Local Guide Assistance: 24×7</li>
+      <li>🗺️ Offline Maps & Routes</li>
+    </ul>
+    <button type="button" id="emergency-close" class="feedback-close">Close</button>
+  </div>
+</div>
+
+<style>
+  /* Ensure blur background for popup */
+  #emergency-popup {
+    display: none;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0,0,0,0.6); /* semi-transparent */
+    backdrop-filter: blur(6px); /* ✅ blur effect */
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
+</style>
+
+<script>
+  // Emergency Popup
+  const emergencyBtn = document.getElementById('emergency-btn');
+  const emergencyPopup = document.getElementById('emergency-popup');
+  const emergencyClose = document.getElementById('emergency-close');
+
+  emergencyBtn.addEventListener('click', () => {
+    emergencyPopup.style.display = 'flex';
+  });
+
+  emergencyClose.addEventListener('click', () => {
+    emergencyPopup.style.display = 'none';
+  });
+
+  window.addEventListener('click', e => {
+    if (e.target === emergencyPopup) emergencyPopup.style.display = 'none';
+  });
+</script>
+
+
+
+  
+  <!-- Calendar Popup -->
+  <div id="calendar-popup" class="popup">
+    <div class="calendar-content">
+      <button id="calendar-close" class="calendar-close">Close</button>
+      <h3>Festivals of Sikkim</h3>
+      <ul>
+        <li><strong>Losar:</strong> February</li>
+        <li><strong>Losoong:</strong> December</li>
+        <li><strong>Saga Dawa:</strong> May/June</li>
+        <li><strong>Pang Lhabsol:</strong> August/September</li>
+        <li><strong>Maghe Sankranti:</strong> January</li>
+        <li><strong>Dasain:</strong> October</li>
+        <li><strong>Tihar:</strong> November</li>
+        <li><strong>Bhumchu:</strong> February/March</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Lost Assistance Popup -->
+  <div id="lost-popup" class="popup">
+    <div class="lost-content">
+      <video id="video" autoplay playsinline></video>
+      <canvas id="overlay"></canvas>
+      <button class="close" id="closeBtn">X</button>
+      <div class="destination">Guiding to: Main Market</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 SikkimExplorer • All Rights Reserved
+  </footer>
+
+  <script>
+    // Calendar Popup
+    const calendarToggle = document.getElementById('calendar-toggle');
+    const calendarPopup = document.getElementById('calendar-popup');
+    const calendarClose = document.getElementById('calendar-close');
+    calendarToggle.addEventListener('click', () => calendarPopup.style.display = 'flex');
+    calendarClose.addEventListener('click', () => calendarPopup.style.display = 'none');
+    window.addEventListener('click', e => { if (e.target === calendarPopup) calendarPopup.style.display = 'none'; });
+
+    // Feedback Popup
+    const feedbackBtn = document.getElementById('feedback-btn');
+    const feedbackPopup = document.getElementById('feedback-popup');
+    const feedbackClose = document.getElementById('feedback-close');
+    const feedbackForm = document.getElementById('feedback-form');
+
+    feedbackBtn.addEventListener('click', () => {
+      feedbackPopup.style.display = 'flex';
+    });
+
+    feedbackClose.addEventListener('click', () => {
+      feedbackPopup.style.display = 'none';
+    });
+
+    window.addEventListener('click', e => {
+      if (e.target === feedbackPopup) feedbackPopup.style.display = 'none';
+    });
+
+    feedbackForm.addEventListener('submit', e => {
+      e.preventDefault();
+      alert("✅ Thank you for your feedback!");
+      feedbackPopup.style.display = 'none';
+      feedbackForm.reset();
+    });
+
+    // Lost Assistance Popup
+    const lostBtn = document.getElementById("lostBtn");
+    const lostPopup = document.getElementById("lost-popup");
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("overlay");
+    const ctx = canvas.getContext("2d");
+    const closeBtn = document.getElementById("closeBtn");
+
+    lostBtn.addEventListener("click", async () => {
+      lostPopup.style.display = "flex";
+      try {
+        let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        video.srcObject = stream;
+        video.addEventListener("loadedmetadata", () => {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          drawGuide();
+        });
+      } catch (err) {
+        alert("Camera access denied or not available.");
+      }
+    });
+
+    function drawGuide() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = "lime";
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(canvas.width / 2, canvas.height - 50);
+      ctx.lineTo(canvas.width / 2, canvas.height - 150);
+      ctx.lineTo(canvas.width / 2 + 80, canvas.height - 250);
+      ctx.stroke();
+      ctx.fillStyle = "lime";
+      ctx.beginPath();
+      ctx.moveTo(canvas.width / 2 + 80, canvas.height - 260);
+      ctx.lineTo(canvas.width / 2 + 70, canvas.height - 240);
+      ctx.lineTo(canvas.width / 2 + 90, canvas.height - 240);
+      ctx.closePath();
+      ctx.fill();
+      requestAnimationFrame(drawGuide);
+    }
+
+    closeBtn.addEventListener("click", () => {
+      lostPopup.style.display = "none";
+      let stream = video.srcObject;
+      if (stream) stream.getTracks().forEach(track => track.stop());
+      video.srcObject = null;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+  </script>
+</body>
+</html>
+     
+
+
+
